@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <title>Photography</title>
+</head>
+
+<body>
+    <div>
+        <div id="uploadModal" class="modal">
+            <div class="modal-content">
+                <span onclick="document.getElementById('uploadModal').style.display='none'"
+                    style="float:right;cursor:pointer">&times;</span>
+                <h1 style="text-align: center;">Upload a Photo</h1>
+                <div id="uplode">
+                    <h2>Uplode Your Photo:</h2><input id="photoUpload" type="file" accept="image/*"><br><br>
+                    <h2>Caption:</h2><input id="enter_caption" type="text" placeholder="Capction"><br><br>
+                    <h2>Date:</h2><input id="enter_date" type="date" placeholder="Date"><br><br>
+                    <h2>Location:</h2><input id="file" type="Text" placeholder="Enter Your Loaction"><br><br>
+                    <button onclick="upload()" id="uploadButton">Upload</button>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <a href="add_photo.html"><button class="nav">
+                    <h1> Your Profile</h1>
+                </button></a>
+            <button class="upload-button" onclick="document.getElementById('uploadModal').style.display='block'">
+                <h1>Upload Photo</h1>
+            </button>
+        </nav>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="img1.avif" alt="Image 1">
+                    <div id="d1">
+                        <h1>Date: 2 June 2024<br>Location:Aurangabad</h1>
+                    </div>
+                </div>
+                <div class="swiper-slide"><img src="img2.avif" alt="Image 2">
+                    <div id="d2">
+                        <h1>Date: 3 June 2024<br>Location:Aurangabad</h1>
+                    </div>
+                </div>
+                <div class="swiper-slide"><img src="img3.avif" alt="Image 3">
+                    <div id="d3">
+                        <h1>Name:Date: 4 June 2024<br>Location:Aurangabad</h1>
+                    </div>
+                </div>
+                <div class="swiper-slide"><img src="img4.avif" alt="Image 4">
+                    <div id="d4">
+                        <h1>Date: 2 June 2024<br>Location:Aurangabad</h1>
+                    </div>
+                </div>
+                <div class="swiper-slide"><img src="img2.avif" alt="Image 4">
+                    <div id="d4">
+                        <h1>Date: 2 June 2024<br>Location:Aurangabad</h1>
+                    </div>
+                </div>
+                <div class="swiper-slide"><img src="img3.avif" alt="Image 4">
+                    <div id="d4">
+                        <h1>Date: 2 June 2024<br>Location:Aurangabad</h1>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="photo-display-container" id="photoDisplayContainer"></div>
+                    <div id="d5"> 
+                        <h2 id="caption"></h2>
+                        <h2 id="date"></h2>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+        // script.js
+        document.getElementById('uploadButton').addEventListener('click', function() {
+            const fileInput = document.getElementById('photoUpload');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    document.getElementById('photoDisplayContainer').appendChild(img);
+                };
+                
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select a file.');
+            }
+        });
+            </script>
+
+            <script>
+                function upload() {
+                    // Get the value from the input field
+                    var input = document.getElementById("enter_caption").value;
+                    var inputDate = document.getElementById("enter_date").value;
+                    // Display the input value on the screen
+                    var caption= document.getElementById("caption");
+                    caption.textContent = input;
+
+                    var date = document.getElementById("date");
+                    date.textContent = "Date: " + inputDate;
+                }
+            </script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow', // Change this to 'slide', 'fade', 'cube', 'coverflow', or 'flip'
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            },
+            //if not loop then in line  
+            loop: true,
+        });
+    </script>
+
+    <script>
+        // Script to handle modal functionality
+        var modal = document.getElementById('uploadModal');
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
